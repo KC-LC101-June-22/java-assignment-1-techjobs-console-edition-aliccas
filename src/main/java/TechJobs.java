@@ -10,7 +10,7 @@ public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -77,7 +77,7 @@ public class TechJobs {
         Boolean validChoice = false;
         String[] choiceKeys = new String[choices.size()];
 
-        // Put the choices in an ordered structure so we can
+        // Put the choices in an ordered structure, so we can
         // associate an integer with each one
         int i = 0;
         for (String choiceKey : choices.keySet()) {
@@ -112,14 +112,32 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
 
     // Print a list of jobs
+    //ArrayList is created with a HashMap called someJobs which is declared with <String, String> as the data types for the key value pairs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-
-        System.out.println("printJobs is not implemented yet");
+        //if the result are greater than 0 then print the following
+        if (someJobs.size() > 0) {
+            //loop through someJobs
+            for (HashMap<String, String> jobs : someJobs) {
+                System.out.println("\n*****");
+                //the iterator variable job is of type Map.Entry<String, String>
+                //use Map.Entry object which represents key/value pairs within HashMaps and create for-each loop
+                //entrySet() returns the set of key-value mappings
+                for (Map.Entry<String, String> job : jobs.entrySet()) {
+                    //getKey and getValue represent the key and value of the map item
+                    System.out.println(job.getKey() + ": " + job.getValue());
+                }
+                System.out.println("*****");
+            }
+        //if no results are found print no results
+        } else {
+            System.out.print("No Results");
+        }
     }
 }
+
