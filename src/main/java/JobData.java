@@ -78,8 +78,8 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
-
-            if (aValue.contains(value)) {
+            //make case-insensitive
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -97,9 +97,24 @@ public class JobData {
 
         // load data, if not already loaded
         loadData();
-
+        //Create a new ArrayList called jobs using HashMap
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        //loop through allJobs (for each job in allJobs) allJobs was an arrayList that stores the HashMap keys and values of the different jobs
+        for (HashMap<String, String> job : allJobs) {
+            //create for-each loop using keySet which returns a collection containing all keys in the map
+            for (String jobKey : job.keySet()) {
+                //check job key for search word and make it case-insensitive
+                if (job.get(jobKey).toLowerCase().contains(value.toLowerCase())) {
+                    //do not include duplicates when adding to ArrayList
+                    if (!jobs.contains(job)) {
+                        //add the jobs found in the search to the ArrayList
+                        jobs.add(job);
+                    }
+                }
+            }
+        }
         // TODO - implement this method
-        return null;
+        return jobs;
     }
 
     /**
